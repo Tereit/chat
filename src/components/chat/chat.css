@@ -1,0 +1,29 @@
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'text text'
+        'input button';
+    grid-gap: 5px;
+    grid-template-columns: 300px 100px;
+}
+
+.grid-text {
+    grid-area: text;
+}
+
+.grid-input {
+    grid-area: input;
+    text-align: center;
+}
+
+.grid-input input {
+    width: 260px;
+}
+
+.grid-button {
+    grid-area: button;
+}
+
+.grid-button button {
+    width: 90px;
+}
