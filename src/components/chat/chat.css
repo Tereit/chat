@@ -5,6 +5,7 @@
         'input button';
     grid-gap: 5px;
     grid-template-columns: 300px 100px;
+    grid-area: chat;
 }
 
 .grid-text {

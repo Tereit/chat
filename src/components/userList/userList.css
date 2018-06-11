@@ -1,0 +1,6 @@
+.userList {
+    grid-area: userList;
+    border: solid black 1px;
+    margin: 0;
+    margin-bottom: 5px;
+}

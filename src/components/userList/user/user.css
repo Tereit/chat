@@ -1,0 +1,8 @@
+.user {
+    border: solid black 1px;
+    display: table;
+}
+
+.user ul {
+    text-align: left;
+}
