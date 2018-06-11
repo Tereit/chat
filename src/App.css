@@ -1,9 +1,9 @@
 .App {
     display: grid;
     grid-template-areas:
-      'title title title'
-      '. chat userList';
-    grid-template-columns: 150px 400px 150px;
+      '. . title . .'
+      '. . chat userList .';
+    grid-template-columns: auto 150px 400px 150px auto;
     grid-gap: 5px;
 }
 
