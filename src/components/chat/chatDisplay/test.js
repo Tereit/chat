@@ -7,8 +7,8 @@ let chatHistoryMock, wrapper;
 describe("ChatDisplay component", () => {
     beforeEach(() => {
         chatHistoryMock = [
-            {user: "test1", text: "hello"},
-            {user: "test2", text: "hello back"}
+            {sentBy: "test1", message: "hello"},
+            {sentBy: "test2", message: "hello back"}
         ];
         wrapper = shallow(<ChatDisplay chatHistory={chatHistoryMock} />);
     });
@@ -20,8 +20,8 @@ describe("ChatDisplay component", () => {
     it('should show the message and the user that sent the message', () => {
         const mounted = mount(<ChatDisplay chatHistory={chatHistoryMock} />);
         const first = mounted.find(ChatMessage).first();
-        expect(first.contains(chatHistoryMock[0].user)).toEqual(true);
-        expect(first.contains(chatHistoryMock[0].text)).toEqual(true);
+        expect(first.contains(chatHistoryMock[0].sentBy)).toEqual(true);
+        expect(first.contains(chatHistoryMock[0].message)).toEqual(true);
     });
 
 });
