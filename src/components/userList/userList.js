@@ -7,13 +7,13 @@ import './userList.css';
 const UserList = (props) => {
     
     return(
-        <ul className="userList">
+        <div className="userList">
             {
                 props.users.map((user, index) => 
                     <User key={index} user={user} />
                 )
             }
-        </ul>)
+        </div>)
 }
 
 UserList.propTypes = {

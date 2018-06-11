@@ -5,17 +5,26 @@ import ChatMessage from '../chatMessage';
 
 import './chatDisplay.css';
 
-const ChatDisplay = (props) => (
-    <div className="chatDisplay">
-        <ul>
-            {
-                props.chatHistory.map((msg, index) =>
-                    <ChatMessage key={index} msg={msg} />
-                )
-            }
-        </ul>
-    </div>
-)
+class ChatDisplay extends React.Component {
+
+    componentDidUpdate() {
+        this._div.scrollTop = this._div.scrollHeight;
+    }
+    render() {
+        return(
+            <div 
+                className="chatDisplay"
+                ref={(ref) => this._div = ref}
+            >   
+                {
+                    this.props.chatHistory.map((msg, index) =>
+                        <ChatMessage key={index} msg={msg} />
+                    )
+                }
+            </div>
+        )
+    } 
+}
 
 ChatDisplay.propTypes = {
     chatHistory: PropTypes.array.isRequired

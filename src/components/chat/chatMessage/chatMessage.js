@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './chatMessage.css';
+
 const ChatMessage = (props) => (
-    <li className="chatMessage">
+    <div className="chatMessage">
         {props.msg.user} says: 
         {props.msg.text}
-    </li>
+    </div>
 )
 
 ChatMessage.propTypes = {
