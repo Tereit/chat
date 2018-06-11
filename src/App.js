@@ -17,10 +17,12 @@ const config = {
 firebase.initializeApp(config);
 
 class App extends Component {
+	unsubHistory;
+	unsubUsers;
 	constructor(props) {
 		super(props);
 		this.state = {
-			chatHistory: [{user: "Morten", text:"testing"}],
+			chatHistory: [],
 			users: [],
 			isSignedIn: false,
 			currentUser: "undefined"
@@ -52,22 +54,38 @@ class App extends Component {
 					currentUser: user.uid,
 				});
 				this.getUserList();
+				this.getChatHistory();
+			} else {
+				this.setState({
+					users: [],
+					chatHistory: []
+				});
+				this.unsubHistory();
+				this.unsubUsers();
 			}
 		});
 	}
 	getUserList() {
-		let users = [];
-		firebase.firestore().collection("users").get().then((data) => {
+		this.unsubUsers = firebase.firestore().collection("users").orderBy("name").onSnapshot((data) => {
 			data.forEach(doc => {
-				users.push(doc.data());
-			});
-			this.setState({
-				users: users,
+				this.setState({
+					users: [...this.state.users, doc.data()]
+				});
 			});
 		});
 	}
+	getChatHistory() {
+		this.unsubHistory = firebase.firestore().collection("chatHistory").orderBy("time")
+			.limit(20).onSnapshot(data => {
+				data.forEach(doc => {
+					this.setState({
+						chatHistory: [...this.state.chatHistory, doc.data()]
+					});
+				});
+			});
+	}
 	componentWillUnmount() {
-		this.unregisterAuthObserver();
+		this.unregisterAuthObserver();	
 	}
 
 	updateChatHistory(value) {
