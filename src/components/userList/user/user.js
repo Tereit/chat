@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './user.css';
 
 const User = (props) => (
-    <p className="user" >{props.user.userName}</p>
+    <p className="user" >{props.user.name}</p>
 )
 
 User.propTypes = {

@@ -21,8 +21,9 @@ class App extends Component {
 		super(props);
 		this.state = {
 			chatHistory: [{user: "Morten", text:"testing"}],
-			users: [{userName: "Morten"}],
+			users: [],
 			isSignedIn: false,
+			currentUser: "undefined"
 		}
 		this.updateChatHistory = this.updateChatHistory.bind(this);
 
@@ -37,9 +38,33 @@ class App extends Component {
 		};
 	}
 	componentDidMount() {
-		this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-			(user) => this.setState({isSignedIn: !!user})
-		);
+		this.unregisterAuthObserver = firebase.auth().onAuthStateChanged((user) => {
+			this.setState({
+				isSignedIn: !!user,
+			});
+			if(user) {
+				firebase.firestore().collection("users").doc(user.uid).set({
+					name: user.displayName,
+					email: user.email,
+					img: user.photoURL
+				});
+				this.setState({
+					currentUser: user.uid,
+				});
+				this.getUserList();
+			}
+		});
+	}
+	getUserList() {
+		let users = [];
+		firebase.firestore().collection("users").get().then((data) => {
+			data.forEach(doc => {
+				users.push(doc.data());
+			});
+			this.setState({
+				users: users,
+			});
+		});
 	}
 	componentWillUnmount() {
 		this.unregisterAuthObserver();
