@@ -9,7 +9,7 @@ describe('Chat component', () => {
             {user: "test1", text: "hello"},
             {user: "test2", text: "hello back"}
         ];
-        wrapper = shallow(<Chat chatHistory={chatHistoryMock} />);
+        wrapper = shallow(<Chat chatHistory={chatHistoryMock} user={"tester"} />);
     });
 
     it('should render with a ChatDisplay, an input field and a Button', () => {
