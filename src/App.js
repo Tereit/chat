@@ -74,6 +74,9 @@ class App extends Component {
 	}
 	getUserList() {
 		this.unsubUsers = firestore.collection("users").orderBy("name").onSnapshot((data) => {
+			this.setState({
+				users: []
+			});
 			data.forEach(doc => {
 				this.setState({
 					users: [...this.state.users, doc.data()]
