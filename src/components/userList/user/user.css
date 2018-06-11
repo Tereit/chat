@@ -1,4 +1,21 @@
 .user {
+    grid-area: name;
     display: table;
     margin: 2px;
+}
+.dot {
+    grid-area: status;
+    height: 8px;
+    width: 8px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+    align-self: center;
+    justify-self: center;
+}
+.grid {
+    display: grid;
+    grid-template-areas: 'status name';
+    grid-template-columns: 10% 90%;
+    grid-template-rows: 25px;
 }

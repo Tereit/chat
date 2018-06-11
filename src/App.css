@@ -3,7 +3,7 @@
     grid-template-areas:
       '. . title signOut .'
       '. . chat userList .';
-    grid-template-columns: auto 150px 400px 150px auto;
+    grid-template-columns: auto 150px 500px 200px auto;
     grid-gap: 5px;
 }
 

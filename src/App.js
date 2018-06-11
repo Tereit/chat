@@ -28,9 +28,11 @@ class App extends Component {
 			chatHistory: [],
 			users: [],
 			isSignedIn: false,
-			currentUser: "undefined"
+			currentUser: "undefined",
+			uid: ""
 		}
 		this.updateChatHistory = this.updateChatHistory.bind(this);
+		this.signOut = this.signOut.bind(this);
 
 		this.uiConfig = {
 			signInFlow: 'popup',
@@ -51,10 +53,12 @@ class App extends Component {
 				firestore.collection("users").doc(user.uid).set({
 					name: user.displayName,
 					email: user.email,
-					img: user.photoURL
+					img: user.photoURL,
+					online: true
 				});
 				this.setState({
 					currentUser: user.displayName,
+					uid: user.uid,
 				});
 				this.getUserList();
 				this.getChatHistory();
@@ -91,6 +95,14 @@ class App extends Component {
 	componentWillUnmount() {
 		this.unregisterAuthObserver();	
 	}
+	async signOut() {
+		if(this.state.uid !== "") {
+			await firestore.collection("users").doc(this.state.uid).set({
+				online: false
+			}, {merge: true});
+		}
+		firebase.auth().signOut();		
+	}
 
 	updateChatHistory(value) {
 		firebase.firestore().collection("chatHistory").add(value);
@@ -112,7 +124,7 @@ class App extends Component {
 				<h1 className="title">A simple chat app...</h1>
 				<Chat updateChatHistory={this.updateChatHistory} chatHistory={this.state.chatHistory} user={this.state.currentUser} />
 				<UserList users={this.state.users} />
-				<button className="signOut" onClick={() => firebase.auth().signOut()}>Sign Out</button>
+				<button className="signOut" onClick={this.signOut}>Sign Out</button>
 			</div>
 		);
 	}
