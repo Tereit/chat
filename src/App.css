@@ -1,7 +1,7 @@
 .App {
     display: grid;
     grid-template-areas:
-      '. . title . .'
+      '. . title signOut .'
       '. . chat userList .';
     grid-template-columns: auto 150px 400px 150px auto;
     grid-gap: 5px;
@@ -9,4 +9,11 @@
 
 .title {
     grid-area: title;
+    justify-self: center;
+}
+
+.signOut {
+    grid-area: signOut;
+    justify-self: center;
+    align-self: center;
 }
