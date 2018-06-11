@@ -85,12 +85,12 @@ class App extends Component {
 		});
 	}
 	getChatHistory() {
-		this.unsubHistory = firestore.collection("chatHistory").orderBy("time")
-			.limit(20).onSnapshot(data => {
+		this.unsubHistory = firestore.collection("chatHistory").orderBy("time", "desc")
+			.limit(40).onSnapshot(data => {
 				this.setState({ chatHistory: [] })
 				data.forEach(doc => {
 					this.setState({
-						chatHistory: [...this.state.chatHistory, doc.data()]
+						chatHistory: [doc.data(), ...this.state.chatHistory]
 					});
 				});
 			});
