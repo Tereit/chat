@@ -17,7 +17,7 @@ class ChatDisplay extends React.Component {
                 ref={(ref) => this._div = ref}
             >   
                 {
-                    this.props.chatHistory.map((msg, index) =>
+                    this.props.chatHistory.map((msg, index) => 
                         <ChatMessage key={index} msg={msg} />
                     )
                 }

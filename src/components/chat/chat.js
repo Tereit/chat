@@ -8,7 +8,7 @@ const Chat = (props) => {
     let inputVal;
 
     const handleSend = () => {
-        const newMsg = {user: "Test Person", text: inputVal.value};
+        const newMsg = {sentBy: props.user, message: inputVal.value, time: Date.now()};
         props.updateChatHistory(newMsg);
         inputVal.value = "";
     }
@@ -41,7 +41,8 @@ const Chat = (props) => {
 }
 
 Chat.propTypes = {
-    chatHistory: PropTypes.array.isRequired
+    chatHistory: PropTypes.array.isRequired,
+    user: PropTypes.string.isRequired
 };
 
 export default Chat;

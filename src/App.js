@@ -15,6 +15,9 @@ const config = {
     messagingSenderId: "637973744531"
 }
 firebase.initializeApp(config);
+const firestore = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+firestore.settings(settings);
 
 class App extends Component {
 	unsubHistory;
@@ -45,13 +48,13 @@ class App extends Component {
 				isSignedIn: !!user,
 			});
 			if(user) {
-				firebase.firestore().collection("users").doc(user.uid).set({
+				firestore.collection("users").doc(user.uid).set({
 					name: user.displayName,
 					email: user.email,
 					img: user.photoURL
 				});
 				this.setState({
-					currentUser: user.uid,
+					currentUser: user.displayName,
 				});
 				this.getUserList();
 				this.getChatHistory();
@@ -66,7 +69,7 @@ class App extends Component {
 		});
 	}
 	getUserList() {
-		this.unsubUsers = firebase.firestore().collection("users").orderBy("name").onSnapshot((data) => {
+		this.unsubUsers = firestore.collection("users").orderBy("name").onSnapshot((data) => {
 			data.forEach(doc => {
 				this.setState({
 					users: [...this.state.users, doc.data()]
@@ -75,8 +78,9 @@ class App extends Component {
 		});
 	}
 	getChatHistory() {
-		this.unsubHistory = firebase.firestore().collection("chatHistory").orderBy("time")
+		this.unsubHistory = firestore.collection("chatHistory").orderBy("time")
 			.limit(20).onSnapshot(data => {
+				this.setState({ chatHistory: [] })
 				data.forEach(doc => {
 					this.setState({
 						chatHistory: [...this.state.chatHistory, doc.data()]
@@ -89,9 +93,7 @@ class App extends Component {
 	}
 
 	updateChatHistory(value) {
-		this.setState({
-			chatHistory: [...this.state.chatHistory, value]
-		});
+		firebase.firestore().collection("chatHistory").add(value);
 	}
 	render() {
 		if(!this.state.isSignedIn) {
@@ -108,7 +110,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<h1 className="title">A simple chat app...</h1>
-				<Chat updateChatHistory={this.updateChatHistory} chatHistory={this.state.chatHistory} />
+				<Chat updateChatHistory={this.updateChatHistory} chatHistory={this.state.chatHistory} user={this.state.currentUser} />
 				<UserList users={this.state.users} />
 				<button className="signOut" onClick={() => firebase.auth().signOut()}>Sign Out</button>
 			</div>
