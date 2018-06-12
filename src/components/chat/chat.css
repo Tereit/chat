@@ -3,9 +3,25 @@
     grid-template-areas:
         'text text'
         'input button';
-    grid-gap: 5px;
-    grid-template-columns: 350px 150px;
+    grid-gap: 10px;
+    grid-template-columns: 48% 48%;
     grid-area: chat;
+}
+
+@media (min-width: 500px) {
+    .grid-container {
+        display: grid;
+        grid-template-areas:
+            'text text'
+            'input button';
+        grid-gap: 5px;
+        grid-template-columns: 350px 150px;
+        grid-area: chat;
+    }
+
+    .grid-input {
+        width: 260px;
+    }
 }
 
 .grid-text {
@@ -18,7 +34,7 @@
 }
 
 .grid-input input {
-    width: 260px;
+    width: 99%;
 }
 
 .grid-button {
@@ -26,5 +42,5 @@
 }
 
 .grid-button button {
-    width: 90px;
+    width: 80%;
 }

@@ -1,10 +1,11 @@
 .App {
     display: grid;
     grid-template-areas:
-      '. . title signOut .'
-      '. . chat userList .';
-    grid-template-columns: auto 150px 500px 200px auto;
-    grid-gap: 5px;
+        'title signOut'
+        'chat chat'
+        'userList userList';
+    grid-template-columns: 48% 48%;
+    grid-gap: 10px;
 }
 
 .title {
@@ -16,4 +17,15 @@
     grid-area: signOut;
     justify-self: center;
     align-self: center;
+}
+
+@media (min-width: 500px) {
+    .App {
+        display: grid;
+        grid-template-areas:
+          '. . title signOut .'
+          '. . chat userList .';
+        grid-template-columns: auto 150px 500px 200px auto;
+        grid-gap: 5px;
+    }
 }
