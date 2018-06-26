@@ -29,6 +29,7 @@ const Chat = (props) => {
             <div className="grid-input">
                 <input 
                     type="text" 
+                    placeholder="Write your message here..."
                     onKeyDown={handleKeyPress} 
                     ref={(input) => inputVal = input} 
                 />

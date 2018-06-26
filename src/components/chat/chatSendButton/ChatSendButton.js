@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './chatSendButton.css';
+
 const ChatSendButton = (props) => {
     return(
-        <button onClick={props.onClick} >Send</button>
+        <button className="send" onClick={props.onClick} >Send</button>
     )
 }
 

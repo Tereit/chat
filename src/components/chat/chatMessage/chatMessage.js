@@ -6,8 +6,8 @@ import './chatMessage.css';
 const ChatMessage = (props) => {
     return(
         <div className="chatMessage">
-            {props.msg.sentBy} says: 
-            {props.msg.message}
+            <div className="sender">{props.msg.sentBy}:</div>
+            <div className="msg">{props.msg.message}</div>
         </div>
     )
 }

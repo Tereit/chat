@@ -35,6 +35,10 @@
 
 .grid-input input {
     width: 99%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    border-radius: 10px;
+    padding-left: 5px;
 }
 
 .grid-button {

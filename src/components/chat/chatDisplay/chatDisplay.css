@@ -4,6 +4,7 @@
     overflow-y: scroll;
     resize: none;
     border: solid black 1px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 @media (min-width: 500px) {
