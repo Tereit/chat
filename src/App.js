@@ -108,6 +108,9 @@ class App extends Component {
 	}
 
 	updateChatHistory(value) {
+		if(value.message === "") {
+			return;
+		}
 		firebase.firestore().collection("chatHistory").add(value);
 	}
 	render() {
